@@ -24,10 +24,10 @@ const config: Config = {
         verdigris: '#2A5550',
       },
       fontFamily: {
-        display: ['Newsreader', 'ui-serif', 'Georgia', 'serif'],
-        body: ['Newsreader', 'ui-serif', 'Georgia', 'serif'],
-        ui: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        display: ['var(--font-display)', 'ui-serif', 'Georgia', 'serif'],
+        body: ['var(--font-display)', 'ui-serif', 'Georgia', 'serif'],
+        ui: ['var(--font-ui)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       transitionTimingFunction: {
         'settle-stamp': 'cubic-bezier(0.22, 0.6, 0.2, 1)',
