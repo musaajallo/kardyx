@@ -1,0 +1,23 @@
+{
+  "name": "@kardyx/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./build/web/tokens.js",
+  "types": "./build/web/tokens.d.ts",
+  "exports": {
+    ".": "./build/web/tokens.js",
+    "./tailwind": "./build/tailwind/tokens.js",
+    "./nativewind": "./build/nativewind/tokens.js",
+    "./figma": "./build/figma/tokens.json",
+    "./source": "./src/tokens.json"
+  },
+  "scripts": {
+    "build": "node ./style-dictionary.config.mjs",
+    "clean": "rimraf build .turbo"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "style-dictionary": "^4.3.0"
+  }
+}

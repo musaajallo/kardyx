@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Kardyx",
+    "slug": "kardyx",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "scheme": "kardyx",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.kardyx.app",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.kardyx.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FAF6EC"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

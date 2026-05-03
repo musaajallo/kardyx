@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kardyx · Direction B · Living Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;0,9..144,900;1,9..144,500;1,9..144,800&family=Inter:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1614;
+  --rust:#D85A2C;
+  --rust-deep:#A33E18;
+  --cream:#F5EBD8;
+  --paper:#FBF3E2;
+  --mint:#6FCB91;
+  --saffron:#F5B935;
+  --line:rgba(26,22,20,0.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:'Inter',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.serif{font-family:'Fraunces',ui-serif,Georgia,serif}
+.hand{font-family:'Caveat',cursive}
+.page{max-width:1320px;margin:0 auto;padding:56px 48px 96px}
+
+.bar{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:48px}
+.bar .id{font-family:'Fraunces',serif;font-style:italic;font-size:14px;letter-spacing:0.02em;color:var(--ink)}
+.bar .id b{font-weight:700;font-style:normal}
+
+/* Hero */
+.hero{position:relative;padding:48px 0 56px;border-bottom:2px solid var(--ink);margin-bottom:56px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
+.kicker{display:inline-block;font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:18px;color:var(--rust-deep);margin-bottom:18px;border-bottom:2px solid var(--rust);padding-bottom:4px}
+.wordmark{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(96px,15vw,200px);line-height:0.86;letter-spacing:-0.045em;color:var(--ink);position:relative}
+.wordmark .a{color:var(--rust);font-style:italic}
+.wordmark .y{display:inline-block;transform:translateY(6px) rotate(-4deg);color:var(--saffron)}
+.wordmark .x{display:inline-block;transform:rotate(3deg);color:var(--mint)}
+.wordmark::after{
+  content:"";position:absolute;left:0;right:60%;bottom:-8px;height:8px;background:var(--rust);
+  transform:skewY(-1deg);
+}
+.lede{font-family:'Fraunces',serif;font-size:clamp(22px,2.4vw,32px);line-height:1.35;font-weight:500;font-style:italic;color:var(--ink);margin-top:32px;text-wrap:pretty}
+.lede strong{font-style:normal;background:var(--saffron);padding:2px 8px;font-weight:600}
+
+/* Character placeholder card */
+.character-card{aspect-ratio:3/4;background:var(--cream);border:2px solid var(--ink);border-radius:14px;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:24px;box-shadow:8px 8px 0 var(--ink);transform:rotate(2.5deg)}
+.character-card .top-row{display:flex;justify-content:space-between;align-items:flex-start;font-family:'Fraunces',serif;font-weight:800;font-size:32px}
+.character-card .suit{color:var(--rust);font-size:36px}
+.character-card .placeholder{flex:1;margin:8px 0;border:2px dashed var(--ink);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:rgba(216,90,44,0.06)}
+.character-card .placeholder .ph-emoji{font-family:'Caveat',cursive;font-size:54px;color:var(--rust);transform:rotate(-3deg)}
+.character-card .placeholder .ph-label{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);font-weight:600;text-align:center;line-height:1.4}
+.character-card .name{font-family:'Caveat',cursive;font-size:32px;color:var(--ink);text-align:center;line-height:1}
+.character-card .lore{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--ink);text-align:center;margin-top:4px}
+.character-card .bottom-row{display:flex;justify-content:space-between;align-items:flex-end;font-family:'Fraunces',serif;font-weight:800;font-size:32px;transform:rotate(180deg)}
+
+/* Section */
+.section{margin-bottom:80px}
+.section-head{display:flex;align-items:baseline;gap:18px;margin-bottom:32px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.section-num{font-family:'Caveat',cursive;font-weight:700;font-size:38px;color:var(--rust);line-height:1}
+.section-title{font-family:'Fraunces',serif;font-weight:800;font-size:38px;letter-spacing:-0.01em;line-height:1.05}
+.section-title em{color:var(--rust-deep);font-style:italic;font-weight:500}
+
+/* Logo lab */
+.logo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.logo-cell{aspect-ratio:1.3;background:var(--cream);border:2px solid var(--ink);border-radius:12px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:32px;box-shadow:6px 6px 0 var(--ink)}
+.logo-cell.dark{background:var(--ink);color:var(--cream)}
+.logo-cell.rust{background:var(--rust);color:var(--cream)}
+.logo-cell .label{position:absolute;top:10px;left:14px;font-family:'Caveat',cursive;font-size:18px;color:var(--rust)}
+.logo-cell.dark .label{color:var(--saffron)}
+.logo-cell.rust .label{color:var(--ink)}
+.lockup{display:flex;align-items:center;gap:12px}
+.lockup .seal{width:56px;height:56px;border-radius:50%;border:2.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:900;font-style:italic;font-size:32px}
+.lockup .name{font-family:'Fraunces',serif;font-weight:900;font-size:32px;letter-spacing:-0.02em}
+
+/* Color */
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.sw{aspect-ratio:1;border-radius:14px;border:2px solid var(--ink);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
+.sw .name{font-family:'Fraunces',serif;font-weight:800;font-size:18px;letter-spacing:-0.01em}
+.sw .hex{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.04em;opacity:0.85;margin-top:2px}
+.sw .role{font-family:'Caveat',cursive;font-size:18px;position:absolute;top:10px;right:14px}
+.sw.ink{background:var(--ink);color:var(--cream)}
+.sw.rust{background:var(--rust);color:var(--cream)}
+.sw.cream{background:var(--cream);color:var(--ink)}
+.sw.mint{background:var(--mint);color:var(--ink)}
+.sw.saffron{background:var(--saffron);color:var(--ink)}
+
+/* Type */
+.type-spec{display:flex;flex-direction:column;gap:0}
+.type-row{display:grid;grid-template-columns:170px 1fr;gap:32px;padding:24px 0;border-top:1px solid var(--line)}
+.type-row:first-child{border-top:0}
+.type-row .meta{font-family:'Inter',sans-serif;font-size:11px;color:var(--ink);font-weight:500;line-height:1.7;letter-spacing:0.02em}
+.type-row .meta b{display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:18px;letter-spacing:-0.01em;margin-bottom:6px;color:var(--rust-deep)}
+.type-display{font-family:'Fraunces',serif;font-weight:900;font-size:64px;line-height:1;letter-spacing:-0.025em}
+.type-display em{color:var(--rust);font-style:italic;font-weight:500}
+.type-h1{font-family:'Fraunces',serif;font-weight:800;font-size:36px;letter-spacing:-0.015em;line-height:1.1}
+.type-body{font-family:'Inter',sans-serif;font-size:17px;line-height:1.6;max-width:560px;text-wrap:pretty;font-weight:400}
+.type-flavor{font-family:'Caveat',cursive;font-size:30px;color:var(--rust-deep);line-height:1.1}
+
+/* Motion */
+.motion-stage{background:var(--ink);color:var(--cream);padding:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;min-height:380px;position:relative;overflow:hidden;border:2px solid var(--ink)}
+.motion-cards{display:flex;gap:18px;perspective:1400px}
+.mcard{width:108px;height:158px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:900;font-size:48px;box-shadow:6px 6px 0 rgba(0,0,0,0.3);animation:wobble 3s cubic-bezier(0.34,1.56,0.64,1) infinite;transform-origin:bottom center}
+.mcard:nth-child(1){background:var(--cream);color:var(--ink);animation-delay:0s}
+.mcard:nth-child(2){background:var(--rust);color:var(--cream);animation-delay:0.18s}
+.mcard:nth-child(3){background:var(--saffron);color:var(--ink);animation-delay:0.36s}
+.mcard:nth-child(4){background:var(--mint);color:var(--ink);animation-delay:0.54s}
+@keyframes wobble{
+  0%{transform:translateY(60px) rotate(-12deg) scale(0.9);opacity:0}
+  20%{transform:translateY(-12px) rotate(2deg) scale(1.02);opacity:1}
+  30%{transform:translateY(0) rotate(-2deg) scale(1)}
+  40%{transform:translateY(0) rotate(1deg)}
+  90%{transform:translateY(0) rotate(0);opacity:1}
+  100%{transform:translateY(0) rotate(0);opacity:0}
+}
+.motion-label{position:absolute;top:18px;left:24px;font-family:'Caveat',cursive;font-size:22px;color:var(--saffron)}
+
+/* App mock */
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.phone{aspect-ratio:9/19.5;border-radius:32px;background:var(--ink);padding:14px;box-shadow:10px 10px 0 var(--ink),20px 20px 0 var(--rust);position:relative}
+.phone .screen{background:var(--paper);width:100%;height:100%;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;border:2px solid var(--ink)}
+.phone .top{padding:18px 20px 14px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;background:var(--cream)}
+.phone .top .title{font-family:'Fraunces',serif;font-weight:800;font-size:18px;letter-spacing:-0.01em}
+.phone .top .meta{font-family:'Caveat',cursive;font-size:18px;color:var(--rust-deep);font-weight:700}
+.phone .body{flex:1;padding:18px 20px;overflow:hidden}
+.party-line{font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:13px;color:var(--rust-deep);margin-bottom:10px}
+.players{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.player{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--cream);border:1.5px solid var(--ink);border-radius:8px}
+.player .av{width:24px;height:24px;border-radius:50%;background:var(--rust);color:var(--cream);font-family:'Fraunces',serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.player .nm{font-family:'Inter',sans-serif;font-size:11px;font-weight:600}
+.player.host .av{background:var(--ink)}
+.player.mint .av{background:var(--mint);color:var(--ink)}
+.player.saffron .av{background:var(--saffron);color:var(--ink)}
+.scancard{margin-top:12px;padding:18px 16px;background:var(--saffron);border:2px solid var(--ink);border-radius:10px;text-align:center;position:relative;box-shadow:4px 4px 0 var(--ink)}
+.scancard .glyph{font-family:'Fraunces',serif;font-weight:900;font-size:48px;line-height:1;color:var(--ink)}
+.scancard .glyph .heart{color:var(--rust)}
+.scancard .pwlabel{margin-top:6px;font-family:'Caveat',cursive;font-size:18px;color:var(--rust-deep);font-weight:700}
+.scancard .pwname{font-family:'Fraunces',serif;font-weight:900;font-size:20px;margin-top:0}
+.scancard .pwdesc{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;color:var(--ink);margin-top:4px;line-height:1.4}
+.actions{display:flex;gap:6px;margin-top:14px}
+.btn{flex:1;padding:10px 0;border-radius:8px;text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:13px;border:2px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--cream)}
+.btn.ghost{background:var(--cream);color:var(--ink)}
+.phone-label{font-family:'Caveat',cursive;font-size:22px;color:var(--rust-deep);margin-top:18px;text-align:center;font-weight:700}
+
+/* Vibes */
+.vibes{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.vibe{padding:8px 16px;background:var(--cream);border:2px solid var(--ink);border-radius:999px;font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:14px;letter-spacing:-0.01em;box-shadow:3px 3px 0 var(--ink)}
+
+/* Footer */
+.foot{margin-top:80px;padding-top:24px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--ink);font-weight:500}
+.foot .credit{opacity:0.6}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="bar">
+    <div class="id">Kardyx · Brand Exploration · <b>Direction B</b></div>
+    <div class="id">School: Experimental · Sagmeister / Wolff Olins</div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="kicker">B · Living Cards — A Storybook That Breathes</span>
+        <div class="wordmark">K<span class="a">a</span>rd<span class="y">y</span><span class="x">x</span></div>
+        <p class="lede">A brand that <strong>tells stories</strong>. Hand-rendered warmth, character-led, vibrant. Every card is a <em>tiny performer</em> — and the deck is the cast.</p>
+      </div>
+      <div class="character-card">
+        <div class="top-row"><span>8</span><span class="suit">♥</span></div>
+        <div class="placeholder">
+          <div class="ph-emoji">Musa's Turtle</div>
+          <div class="ph-label">Character art<br/>placeholder</div>
+        </div>
+        <div>
+          <div class="name">Musa's Turtle</div>
+          <div class="lore">"Slow play, deep memory."</div>
+        </div>
+        <div class="bottom-row"><span>8</span><span class="suit">♥</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">A wordmark that <em>wobbles on purpose.</em></h2>
+    </div>
+    <div class="logo-grid">
+      <div class="logo-cell">
+        <div class="label">primary lockup</div>
+        <div class="lockup">
+          <div class="seal">K</div>
+          <div class="name">kardyx</div>
+        </div>
+      </div>
+      <div class="logo-cell dark">
+        <div class="label">night mode</div>
+        <div class="lockup">
+          <div class="seal">K</div>
+          <div class="name">kardyx</div>
+        </div>
+      </div>
+      <div class="logo-cell rust">
+        <div class="label">brand stamp</div>
+        <div class="lockup">
+          <div class="seal">K</div>
+          <div class="name">kardyx</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">A palette of <em>warm rebellion.</em></h2>
+    </div>
+    <div class="swatches">
+      <div class="sw ink"><div class="role">anchor</div><div class="name">Ink</div><div class="hex">#1A1614</div></div>
+      <div class="sw rust"><div class="role">soul</div><div class="name">Rust</div><div class="hex">#D85A2C</div></div>
+      <div class="sw cream"><div class="role">page</div><div class="name">Cream</div><div class="hex">#F5EBD8</div></div>
+      <div class="sw mint"><div class="role">life</div><div class="name">Mint</div><div class="hex">#6FCB91</div></div>
+      <div class="sw saffron"><div class="role">spark</div><div class="name">Saffron</div><div class="hex">#F5B935</div></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Fraunces with <em>opinions</em>, plus a hand on the side.</h2>
+    </div>
+    <div class="type-spec">
+      <div class="type-row">
+        <div class="meta"><b>Display · Fraunces</b>900 italic option<br/>For headlines + character lines</div>
+        <div class="type-display">The cards <em>play you back.</em></div>
+      </div>
+      <div class="type-row">
+        <div class="meta"><b>Heading · Fraunces</b>800<br/>For section starts</div>
+        <div class="type-h1">A deck that knows your name.</div>
+      </div>
+      <div class="type-row">
+        <div class="meta"><b>Body · Inter</b>400/500<br/>For UI, microcopy</div>
+        <div class="type-body">Kardyx turns any standard 52-card deck into a living game. Scan a card and watch a Power-Up bloom on your phone — a trivia challenge, a team alliance, a Power-Up for your friend across the table.</div>
+      </div>
+      <div class="type-row">
+        <div class="meta"><b>Flavor · Caveat</b>700<br/>For lore, character lines, party invites</div>
+        <div class="type-flavor">"You'll need allies for this round, friend."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Motion as <em>personality.</em></h2>
+    </div>
+    <div class="motion-stage">
+      <div class="motion-label">cards have feelings · 3s loop</div>
+      <div class="motion-cards">
+        <div class="mcard">A</div>
+        <div class="mcard">8</div>
+        <div class="mcard">K</div>
+        <div class="mcard">3</div>
+      </div>
+    </div>
+    <p class="lede" style="font-size:18px;font-weight:500;margin-top:24px;font-style:normal">Cards <em>arrive</em> with a wobble — like a child placing a sticker on a fridge. Springy, slightly tilted, never apologetic. Curve: <span class="hand" style="font-size:24px;color:var(--rust-deep)">cubic-bezier(0.34, 1.56, 0.64, 1)</span></p>
+  </section>
+
+  <!-- APP -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Sample app — the <em>Power-Up reveal.</em></h2>
+    </div>
+    <div class="app-grid">
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="top">
+              <div class="title">Round 03</div>
+              <div class="meta">friends only</div>
+            </div>
+            <div class="body">
+              <div class="party-line">4 players · topic: Pop Culture</div>
+              <div class="players">
+                <div class="player host"><span class="av">M</span><span class="nm">Musa</span></div>
+                <div class="player mint"><span class="av">F</span><span class="nm">Fatou</span></div>
+                <div class="player saffron"><span class="av">A</span><span class="nm">Abdou</span></div>
+                <div class="player"><span class="av">I</span><span class="nm">Isatou</span></div>
+              </div>
+              <div class="scancard">
+                <div class="glyph">8<span class="heart">♥</span></div>
+                <div class="pwlabel">power-up!</div>
+                <div class="pwname">Lockup</div>
+                <div class="pwdesc">next player skipped — 2 rounds.</div>
+              </div>
+              <div class="actions">
+                <div class="btn ghost">Veto</div>
+                <div class="btn primary">Apply</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">round in motion</div>
+      </div>
+
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="top">
+              <div class="title">Scan a card</div>
+              <div class="meta">aim &amp; flash</div>
+            </div>
+            <div class="body" style="display:flex;align-items:center;justify-content:center;flex-direction:column">
+              <div style="width:78%;aspect-ratio:1;border:3px dashed var(--rust);border-radius:18px;display:flex;align-items:center;justify-content:center;background:rgba(216,90,44,0.08);position:relative">
+                <div style="font-family:'Caveat',cursive;font-size:22px;color:var(--rust-deep);font-weight:700">point at any card</div>
+                <div style="position:absolute;bottom:-12px;right:-12px;width:36px;height:36px;background:var(--saffron);border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:900;font-size:18px">!</div>
+              </div>
+              <div class="party-line" style="margin-top:18px;text-align:center">offline-friendly · &lt;200ms</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">on-device CV</div>
+      </div>
+
+      <div>
+        <div class="phone">
+          <div class="screen">
+            <div class="top">
+              <div class="title">Standings</div>
+              <div class="meta">season 1</div>
+            </div>
+            <div class="body">
+              <div class="party-line">Top this week ✶</div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+                <div class="player host" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">1</span><span class="nm">Musa Ajallo</span></span><span style="font-family:'Fraunces',serif;font-weight:800;font-size:14px">2840</span></div>
+                <div class="player mint" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">2</span><span class="nm">Awa Jobe</span></span><span style="font-family:'Fraunces',serif;font-weight:800;font-size:14px">2612</span></div>
+                <div class="player saffron" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">3</span><span class="nm">Lamin Sey</span></span><span style="font-family:'Fraunces',serif;font-weight:800;font-size:14px">2401</span></div>
+                <div class="player" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">4</span><span class="nm">Fatou Saine</span></span><span style="font-family:'Fraunces',serif;font-weight:800;font-size:14px">2287</span></div>
+              </div>
+              <div class="party-line" style="margin-top:14px">West Africa · loud and loving it</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">rankings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIBES -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2 class="section-title">If Living Cards were a <em>person.</em></h2>
+    </div>
+    <div class="vibes">
+      <span class="vibe">Storybook</span>
+      <span class="vibe">Character-led</span>
+      <span class="vibe">Hand-rendered</span>
+      <span class="vibe">Warm rebellion</span>
+      <span class="vibe">Saturday-afternoon energy</span>
+      <span class="vibe">Banjul block-party</span>
+      <span class="vibe">Risograph print</span>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div>Direction B · Living Cards</div>
+    <div class="credit">Brand exploration · 2026 · Huashu-Design</div>
+  </div>
+
+</div>
+</body>
+</html>

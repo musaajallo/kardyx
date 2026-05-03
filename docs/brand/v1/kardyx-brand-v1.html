@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kardyx · Brand v1 · Atlas × Quiet Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Locked palette — Atlas backbone + Quiet Game restraint */
+  --paper:#FAF6EC;
+  --paper-deep:#F2EDE0;
+  --mist:#E8E2D4;
+  --ink:#1A1714;
+  --ink-soft:#3A332A;
+  --slate:#6B7280;
+  --line:rgba(26,23,20,0.10);
+  --line-soft:rgba(26,23,20,0.05);
+  /* Single chromatic accent — Clay / Ochre family */
+  --clay:#C04A1A;          /* High-energy moments: Power-Up trigger, primary CTA */
+  --clay-deep:#8C3210;
+  --ochre:#C18A4A;         /* Quiet moments: dividers, marks, season indicators */
+  --verdigris:#2A5550;     /* Reserved for "save / persist / synced" semantic states */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.page{max-width:1280px;margin:0 auto;padding:64px 56px 96px}
+
+.bar{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:56px}
+.bar .id{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.20em;text-transform:uppercase;color:var(--slate)}
+.bar .id b{color:var(--ink);font-weight:500}
+
+/* Hero */
+.hero{padding:64px 0 80px;border-bottom:1px solid var(--line);margin-bottom:64px;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--clay-deep);margin-bottom:32px;font-weight:500}
+.wordmark{font-family:'Newsreader',serif;font-weight:600;font-size:clamp(96px,13vw,176px);line-height:0.92;letter-spacing:-0.02em;color:var(--ink)}
+.wordmark::after{content:"";display:block;width:48px;height:1px;background:var(--ochre);margin-top:28px}
+.lede{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:clamp(20px,1.9vw,26px);line-height:1.5;color:var(--ink-soft);margin-top:40px;max-width:560px;text-wrap:pretty}
+.lede strong{font-style:normal;font-weight:500;color:var(--ink)}
+.hero-mark{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px}
+
+/* Logo slot */
+.logo-slot{aspect-ratio:1;width:100%;max-width:340px;background:var(--paper-deep);border:1.5px dashed var(--ochre);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:32px;position:relative}
+.logo-slot::before{content:"reserved · client-supplied logo";position:absolute;top:14px;left:18px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.20em;text-transform:uppercase;color:var(--ochre)}
+.logo-slot .ring{width:96px;height:96px}
+.logo-slot .ring svg{width:100%;height:100%;display:block;opacity:0.4}
+.logo-slot .placeholder-label{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:18px;color:var(--ink-soft);text-align:center;line-height:1.4}
+.logo-slot .placeholder-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--slate);margin-top:4px;text-align:center}
+
+/* Section */
+.section{margin-bottom:88px}
+.section-head{display:grid;grid-template-columns:140px 1fr;gap:32px;align-items:baseline;margin-bottom:32px}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.22em;color:var(--clay);font-weight:500}
+.section-title{font-family:'Newsreader',serif;font-weight:600;font-size:36px;letter-spacing:-0.015em;line-height:1.15;color:var(--ink)}
+.section-title em{font-style:italic;color:var(--clay-deep);font-weight:500}
+.section-body{display:grid;grid-template-columns:140px 1fr;gap:32px}
+.section-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--slate);letter-spacing:0.04em;line-height:1.85;font-weight:400}
+.section-meta b{display:block;color:var(--ink);font-weight:500;margin-top:14px;margin-bottom:2px}
+.section-meta i{color:var(--clay-deep);font-style:normal;font-weight:500}
+
+/* Color */
+.swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line)}
+.sw{aspect-ratio:0.9;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.04em;position:relative}
+.sw .name{font-family:'Newsreader',serif;font-weight:500;font-size:18px;letter-spacing:-0.005em;line-height:1}
+.sw .hex{font-size:10px;letter-spacing:0.10em;margin-top:6px;opacity:0.8}
+.sw .role{position:absolute;top:14px;left:14px;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;opacity:0.65;font-weight:500}
+.sw.paper{background:var(--paper);color:var(--ink)}
+.sw.mist{background:var(--mist);color:var(--ink)}
+.sw.ochre{background:var(--ochre);color:var(--paper)}
+.sw.clay{background:var(--clay);color:var(--paper)}
+.sw.ink-soft{background:var(--ink-soft);color:var(--paper)}
+.sw.ink{background:var(--ink);color:var(--paper)}
+
+/* Type */
+.type-spec{display:flex;flex-direction:column;gap:0}
+.type-row{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:32px 0;border-top:1px solid var(--line)}
+.type-row:first-child{border-top:0}
+.type-row .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--slate);letter-spacing:0.04em;line-height:1.7}
+.type-row .meta b{display:block;color:var(--ink);font-weight:500;font-size:12px;margin-bottom:2px}
+.type-display{font-family:'Newsreader',serif;font-weight:600;font-size:60px;line-height:1.05;letter-spacing:-0.025em;color:var(--ink)}
+.type-display em{font-style:italic;color:var(--clay-deep);font-weight:500}
+.type-h1{font-family:'Newsreader',serif;font-weight:600;font-size:32px;line-height:1.15;letter-spacing:-0.015em}
+.type-body{font-family:'Newsreader',serif;font-size:18px;line-height:1.6;max-width:580px;text-wrap:pretty;color:var(--ink-soft);font-weight:400}
+.type-body em{color:var(--clay-deep);font-style:italic;font-weight:500}
+.type-mono{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;color:var(--ink);letter-spacing:0.02em}
+.type-ui{font-family:'Inter',sans-serif;font-weight:500;font-size:14px;color:var(--ink);letter-spacing:0.005em;line-height:1.5}
+
+/* Character art slot */
+.character-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}
+.char-card{aspect-ratio:3/4;background:var(--paper-deep);border:1px solid var(--line);position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:24px;overflow:hidden}
+.char-card .top-row{display:flex;justify-content:space-between;align-items:flex-start;font-family:'Newsreader',serif;font-weight:600;font-size:24px;color:var(--ink)}
+.char-card .suit{color:var(--clay)}
+.char-card .art-slot{flex:1;margin:14px 0;border:1px dashed var(--ochre);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:rgba(193,138,74,0.05);padding:20px}
+.char-card .art-slot .label-major{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:18px;color:var(--ink);text-align:center;line-height:1.3}
+.char-card .art-slot .label-minor{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ochre);font-weight:500;text-align:center}
+.char-card .name{font-family:'Newsreader',serif;font-weight:600;font-size:18px;letter-spacing:-0.01em;text-align:center;color:var(--ink)}
+.char-card .lore{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:13px;color:var(--ink-soft);text-align:center;margin-top:4px;line-height:1.4}
+.char-card .bottom-row{display:flex;justify-content:space-between;align-items:flex-end;font-family:'Newsreader',serif;font-weight:600;font-size:24px;color:var(--ink);transform:rotate(180deg)}
+
+/* Motion */
+.motion-stage{background:var(--ink);color:var(--paper);padding:64px 48px;display:flex;align-items:center;justify-content:center;min-height:380px;position:relative;overflow:hidden}
+.motion-cards{display:flex;gap:20px;perspective:1400px}
+.mcard{width:104px;height:152px;background:var(--paper);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-weight:600;color:var(--ink);font-size:48px;box-shadow:0 12px 28px rgba(0,0,0,0.35);animation:settle-stamp 3.2s cubic-bezier(0.22,0.6,0.2,1) infinite}
+.mcard:nth-child(1){animation-delay:0s}
+.mcard:nth-child(2){animation-delay:0.22s;color:var(--clay)}
+.mcard:nth-child(3){animation-delay:0.44s}
+.mcard:nth-child(4){animation-delay:0.66s;color:var(--clay)}
+@keyframes settle-stamp{
+  0%{transform:translateY(-28px);opacity:0;filter:blur(4px)}
+  18%{transform:translateY(0);opacity:1;filter:blur(0)}
+  22%{transform:translateY(-2px)}
+  28%{transform:translateY(0)}
+  88%{transform:translateY(0);opacity:1;filter:blur(0)}
+  100%{transform:translateY(0);opacity:0;filter:blur(0)}
+}
+.motion-label{position:absolute;top:18px;left:24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.20em;color:rgba(250,246,236,0.5);font-weight:500}
+.motion-curve{position:absolute;bottom:18px;right:24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.04em;color:var(--ochre);font-weight:500}
+
+/* App mock */
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.phone{aspect-ratio:9/19.5;border-radius:32px;background:var(--ink);padding:14px;box-shadow:0 24px 48px rgba(26,23,20,0.18);position:relative}
+.phone .screen{background:var(--paper);width:100%;height:100%;border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.phone .top{padding:18px 22px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+.phone .top .title{font-family:'Newsreader',serif;font-weight:600;font-size:18px;letter-spacing:-0.01em}
+.phone .top .meta{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--slate);letter-spacing:0.18em;text-transform:uppercase;font-weight:500}
+.phone .body{flex:1;padding:18px 22px;overflow:hidden;display:flex;flex-direction:column}
+.party-line{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--slate);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;font-weight:500}
+.players-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px}
+.player{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--paper-deep);border-radius:6px}
+.player .av{width:22px;height:22px;border-radius:50%;background:var(--ochre);color:var(--paper);font-family:'Newsreader',serif;font-weight:600;font-size:11px;display:flex;align-items:center;justify-content:center}
+.player .nm{font-family:'Inter',sans-serif;font-size:11px;font-weight:500}
+.player.host .av{background:var(--ink)}
+.player.active .av{background:var(--clay)}
+.scancard{margin-top:auto;padding:24px 16px;background:var(--paper-deep);border:1px solid var(--ochre);text-align:center;position:relative}
+.scancard .glyph{font-family:'Newsreader',serif;font-weight:500;font-size:54px;line-height:1;color:var(--ink)}
+.scancard .glyph .heart{color:var(--clay)}
+.scancard .pwlabel{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.22em;color:var(--ochre);text-transform:uppercase;font-weight:500}
+.scancard .pwname{font-family:'Newsreader',serif;font-weight:600;font-size:22px;margin-top:2px;letter-spacing:-0.01em}
+.scancard .pwdesc{font-family:'Newsreader',serif;font-style:italic;font-size:13px;color:var(--ink-soft);margin-top:6px;line-height:1.4}
+.actions{display:flex;gap:6px;margin-top:14px}
+.btn{flex:1;padding:11px 0;border-radius:6px;text-align:center;font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.06em}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.phone-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--slate);text-transform:uppercase;margin-top:14px;text-align:center;font-weight:500}
+
+/* Voice */
+.voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.voice-block{padding:32px;background:var(--paper-deep)}
+.voice-block .label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.20em;text-transform:uppercase;color:var(--clay-deep);margin-bottom:16px;font-weight:500}
+.voice-block .quote{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.4;color:var(--ink);text-wrap:pretty}
+.voice-block .quote em{color:var(--clay-deep);font-weight:500}
+.voice-block.bad{background:transparent;border:1px dashed var(--slate)}
+.voice-block.bad .label{color:var(--slate)}
+.voice-block.bad .quote{color:var(--slate);font-style:normal;font-weight:300}
+
+/* Vibes */
+.vibes{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.vibe{padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:var(--ink);font-weight:500;background:var(--paper)}
+
+/* Synthesis table */
+.synth-table{width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:14px}
+.synth-table th{text-align:left;padding:14px 16px;background:var(--paper-deep);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--clay-deep);font-weight:500;border-bottom:1px solid var(--line)}
+.synth-table td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6;color:var(--ink-soft)}
+.synth-table td:first-child{font-family:'Newsreader',serif;font-weight:600;font-size:15px;color:var(--ink);width:200px}
+.synth-table td .src{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--clay);margin-right:6px}
+
+/* Footer */
+.foot{margin-top:96px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--slate);letter-spacing:0.20em;text-transform:uppercase;font-weight:500}
+.foot .credit{opacity:0.6}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="bar">
+    <div class="id">Kardyx · Brand v1 · <b>Locked</b></div>
+    <div class="id">Atlas × Quiet Game · A + C Hybrid</div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="kicker">Kardyx · Brand v1.0 · 2026</div>
+      <div class="wordmark">Kardyx</div>
+      <p class="lede">A globally credible card-gaming federation, played at <strong>your kitchen table.</strong> Editorial structure of <em>Atlas</em>, ceremonial restraint of <em>Quiet Game</em>, warm character art at the moments that matter.</p>
+    </div>
+    <div class="hero-mark">
+      <div class="logo-slot">
+        <div class="ring">
+          <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M 48 14 A 34 34 0 1 1 18 62 A 34 34 0 1 1 78 38" stroke="#C18A4A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="placeholder-label">Awaiting client logo</div>
+        <div class="placeholder-meta">drop file at: assets/logo/primary.svg</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYNTHESIS -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">00 / Synthesis</div>
+      <h2 class="section-title">What we kept from <em>each parent direction.</em></h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Why hybrid</b>
+        Brand must read as
+        globally credible (Atlas)
+        but feel safe and warm
+        around a kitchen table
+        (Quiet Game).
+        <b>Character art</b>
+        Lives in product, not
+        in the brand chrome.
+      </div>
+      <table class="synth-table">
+        <thead>
+          <tr><th>System layer</th><th>Decision</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Layout grammar</td>
+            <td><span class="src">A</span>Atlas's editorial grid · numbered sections · monospaced metadata · clear hierarchy. The skeleton.</td>
+          </tr>
+          <tr>
+            <td>Color discipline</td>
+            <td><span class="src">C</span>Quiet Game's restraint — paper, mist, sumi as ground. <span class="src">A</span>Atlas's clay reserved as the high-energy accent for Power-Up moments only. Ochre as the soft brand divider.</td>
+          </tr>
+          <tr>
+            <td>Display typography</td>
+            <td><span class="src">A</span>Newsreader 600 — editorial serif, warmer than a strict modern, holds weight without shouting.</td>
+          </tr>
+          <tr>
+            <td>Body typography</td>
+            <td><span class="src">A+C</span>Inter for product UI, Newsreader 400 italic for editorial body and lore. Newsreader leads when the moment is a moment; Inter leads when the user is doing.</td>
+          </tr>
+          <tr>
+            <td>Metadata typography</td>
+            <td><span class="src">A</span>JetBrains Mono — for codes, party IDs, system text. The federation signal.</td>
+          </tr>
+          <tr>
+            <td>Motion</td>
+            <td><span class="src">A+C</span>Settle-stamp. Faster than C's pure settle, slower than A's punctuated stamp. No bouncy springs. Curve <code>cubic-bezier(0.22, 0.6, 0.2, 1)</code>.</td>
+          </tr>
+          <tr>
+            <td>Character art</td>
+            <td><span class="src">B</span>Hand-illustrated, but rendered in this restrained palette (sumi line work, single ochre or clay accent per character). Character lives on cards and in flavor moments — not in the logo, not in the chrome.</td>
+          </tr>
+          <tr>
+            <td>Voice</td>
+            <td>Editorial-warm. "A round of Kardyx is a kind of attention" — but also "your turn, Musa." Federation tone with a friend's warmth.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">01 / Color</div>
+      <h2 class="section-title">Six tones. <em>Two accents.</em> Strict discipline.</h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Ground</b>
+        Paper · Mist · Ink-soft · Ink
+        Used for everything by default.
+        <b>Accents</b>
+        <i>Ochre</i> — soft brand
+        signal, dividers, marks,
+        passive states.
+        <i>Clay</i> — high-energy
+        accent. Power-Up triggers.
+        Primary CTA. Reserved.
+        <b>Forbidden</b>
+        Bright reds, cool blues,
+        electric greens. Even
+        celebration is muted.
+      </div>
+      <div class="swatches">
+        <div class="sw paper"><div class="role">page</div><div class="name">Paper</div><div class="hex">#FAF6EC</div></div>
+        <div class="sw mist"><div class="role">silence</div><div class="name">Mist</div><div class="hex">#E8E2D4</div></div>
+        <div class="sw ochre"><div class="role">soft</div><div class="name">Ochre</div><div class="hex">#C18A4A</div></div>
+        <div class="sw clay"><div class="role">action</div><div class="name">Clay</div><div class="hex">#C04A1A</div></div>
+        <div class="sw ink-soft"><div class="role">ink soft</div><div class="name">Ink-soft</div><div class="hex">#3A332A</div></div>
+        <div class="sw ink"><div class="role">ink</div><div class="name">Ink</div><div class="hex">#1A1714</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">02 / Typography</div>
+      <h2 class="section-title">Newsreader for moments, Inter for work, <em>JetBrains Mono for the system.</em></h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Display</b>
+        Newsreader 600/700
+        <b>Editorial body</b>
+        Newsreader 400 italic
+        <b>Product UI</b>
+        Inter 400/500/600
+        <b>System</b>
+        JetBrains Mono 400/500
+        <b>Logic</b>
+        Serif when it matters.
+        Sans when you act.
+        Mono when the system speaks.
+      </div>
+      <div class="type-spec">
+        <div class="type-row">
+          <div class="meta"><b>Display · Newsreader</b>60 / 600<br/>Headlines</div>
+          <div class="type-display">The cards are the interface. <em>The game lives in the engine.</em></div>
+        </div>
+        <div class="type-row">
+          <div class="meta"><b>Heading · Newsreader</b>32 / 600<br/>Section titles</div>
+          <div class="type-h1">A round of Kardyx is a kind of attention.</div>
+        </div>
+        <div class="type-row">
+          <div class="meta"><b>Editorial body · Newsreader</b>18 / 400<br/>Lore, descriptions, prose</div>
+          <div class="type-body">Kardyx turns any standard 52-card deck into an evolving game. Scan a card. A Power-Up arrives. <em>Pass it to a friend, save it for later, or play it now.</em></div>
+        </div>
+        <div class="type-row">
+          <div class="meta"><b>Product UI · Inter</b>14 / 500<br/>Buttons, labels, microcopy</div>
+          <div class="type-ui">Apply Power-Up · Veto · Invite via WhatsApp · Round 03 of 12 · 4 players in your party</div>
+        </div>
+        <div class="type-row">
+          <div class="meta"><b>System · JetBrains Mono</b>13 / 500<br/>Codes, IDs, telemetry</div>
+          <div class="type-mono">PARTY · KX-7240<br/>HOST · MUSA · ROUND 03 / 12 · TOPIC TECH<br/>SCAN · 8♥ → POWER-UP · LOCKUP · 220ms</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARACTER -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">03 / Character art</div>
+      <h2 class="section-title">Hand-illustrated, <em>palette-disciplined.</em></h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Where character lives</b>
+        On cards (physical + digital)
+        In flavor moments
+        Never in chrome
+        <b>Style brief</b>
+        Sumi line work
+        Watercolor wash in palette
+        Single accent per character
+        (Ochre OR Clay, not both)
+        <b>Roster</b>
+        Musa's Turtle (8♥) — anchor
+        Additional characters TBD
+        <b>Don't</b>
+        Cartoon outlines
+        Vector flat illustration
+        Photo-real
+      </div>
+      <div class="character-grid">
+        <div class="char-card">
+          <div class="top-row"><span>8</span><span class="suit">♥</span></div>
+          <div class="art-slot">
+            <div class="label-major">Musa's Turtle</div>
+            <div class="label-minor">character art · TBD</div>
+          </div>
+          <div>
+            <div class="name">Musa's Turtle</div>
+            <div class="lore">"Slow play, deep memory."</div>
+          </div>
+          <div class="bottom-row"><span>8</span><span class="suit">♥</span></div>
+        </div>
+        <div class="char-card">
+          <div class="top-row"><span>K</span><span class="suit">♣</span></div>
+          <div class="art-slot">
+            <div class="label-major">Reserved</div>
+            <div class="label-minor">character · TBD</div>
+          </div>
+          <div>
+            <div class="name">— pending —</div>
+            <div class="lore">"Lore added once the figure is sketched."</div>
+          </div>
+          <div class="bottom-row"><span>K</span><span class="suit">♣</span></div>
+        </div>
+        <div class="char-card">
+          <div class="top-row"><span>A</span><span class="suit">♦</span></div>
+          <div class="art-slot">
+            <div class="label-major">Reserved</div>
+            <div class="label-minor">character · TBD</div>
+          </div>
+          <div>
+            <div class="name">— pending —</div>
+            <div class="lore">"Lore added once the figure is sketched."</div>
+          </div>
+          <div class="bottom-row"><span>A</span><span class="suit">♦</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">04 / Motion</div>
+      <h2 class="section-title">Settle, then stamp. <em>No bounce.</em></h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Principle</b>
+        Card arrives with a
+        slight blur, settles,
+        then commits with a
+        single decisive frame.
+        <b>Curve</b>
+        cubic-bezier(0.22, 0.6, 0.2, 1)
+        <b>Timing</b>
+        Card reveal · 320ms
+        Power-Up trigger · 480ms
+        Round transition · 600ms
+        <b>Don't</b>
+        Bouncy springs.
+        Long swooping fades.
+        Parallax decoration.
+      </div>
+      <div class="motion-stage">
+        <div class="motion-label">SCAN → SETTLE → STAMP · 3.2s</div>
+        <div class="motion-cards">
+          <div class="mcard">A</div>
+          <div class="mcard">8</div>
+          <div class="mcard">K</div>
+          <div class="mcard">3</div>
+        </div>
+        <div class="motion-curve">cubic-bezier(0.22, 0.6, 0.2, 1)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">05 / Product</div>
+      <h2 class="section-title">Sample app — the <em>Power-Up reveal.</em></h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Layout grammar</b>
+        Editorial title in Newsreader
+        Mono metadata top-right
+        Player roster as roll
+        Card-on-paper for the
+        Power-Up moment
+        <b>Color logic</b>
+        Mostly paper + ink
+        Ochre dividers and marks
+        Clay only at the trigger
+        <b>Tone</b>
+        Reads like a federation
+        log written by a friend
+      </div>
+      <div class="app-grid">
+        <div>
+          <div class="phone">
+            <div class="screen">
+              <div class="top">
+                <div class="title">Round 03</div>
+                <div class="meta">KX-7240</div>
+              </div>
+              <div class="body">
+                <div class="party-line">4 players · topic — tech</div>
+                <div class="players-row">
+                  <div class="player host"><span class="av">M</span><span class="nm">Musa</span></div>
+                  <div class="player active"><span class="av">F</span><span class="nm">Fatou</span></div>
+                  <div class="player"><span class="av">A</span><span class="nm">Abdou</span></div>
+                  <div class="player"><span class="av">I</span><span class="nm">Isatou</span></div>
+                </div>
+                <div class="scancard">
+                  <div class="glyph">8<span class="heart">♥</span></div>
+                  <div class="pwlabel">Power-Up · Musa's Turtle</div>
+                  <div class="pwname">Lockup</div>
+                  <div class="pwdesc">The next player skips two rounds.</div>
+                </div>
+                <div class="actions">
+                  <div class="btn ghost">Veto</div>
+                  <div class="btn primary">Apply</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">Round · Power-Up reveal</div>
+        </div>
+
+        <div>
+          <div class="phone">
+            <div class="screen">
+              <div class="top">
+                <div class="title">Scan</div>
+                <div class="meta">CV · ON-DEVICE</div>
+              </div>
+              <div class="body" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px">
+                <div style="width:78%;aspect-ratio:1;border:1.5px dashed var(--ochre);display:flex;align-items:center;justify-content:center;background:rgba(193,138,74,0.04)">
+                  <div style="font-family:'Newsreader',serif;font-style:italic;font-size:18px;color:var(--ink-soft);text-align:center;line-height:1.4">aim at any card</div>
+                </div>
+                <div class="party-line" style="margin:0;text-align:center">recognized · &lt;200ms · works offline</div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">Camera · scan</div>
+        </div>
+
+        <div>
+          <div class="phone">
+            <div class="screen">
+              <div class="top">
+                <div class="title">Standing</div>
+                <div class="meta">SEASON · 01</div>
+              </div>
+              <div class="body">
+                <div class="party-line">Top this week</div>
+                <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+                  <div class="player host" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">1</span><span class="nm">Musa Ajallo</span></span><span class="party-line" style="margin:0">2,840</span></div>
+                  <div class="player" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">2</span><span class="nm">Awa Jobe</span></span><span class="party-line" style="margin:0">2,612</span></div>
+                  <div class="player" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">3</span><span class="nm">Lamin Sey</span></span><span class="party-line" style="margin:0">2,401</span></div>
+                  <div class="player" style="justify-content:space-between"><span style="display:flex;gap:8px;align-items:center"><span class="av">4</span><span class="nm">Fatou Saine</span></span><span class="party-line" style="margin:0">2,287</span></div>
+                </div>
+                <div class="party-line" style="margin-top:14px">— west africa —</div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">Rankings</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-num">06 / Voice &amp; Tone</div>
+      <h2 class="section-title">Editorial warmth. <em>Friend at a federation desk.</em></h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta">
+        <b>Principles</b>
+        Direct without being curt
+        Warm without being chatty
+        Specific over clever
+        <b>Bilingual-ready</b>
+        Copy authored to translate
+        cleanly into French, Wolof,
+        Mandinka, Pulaar.
+      </div>
+      <div class="voice-grid">
+        <div class="voice-block">
+          <div class="label">Do</div>
+          <div class="quote">"<em>Your turn, Musa.</em> Scan a card to begin Round 03."</div>
+        </div>
+        <div class="voice-block bad">
+          <div class="label">Don't</div>
+          <div class="quote">"Hey Musa! 🎉 Time to play your card now! Let's go!"</div>
+        </div>
+        <div class="voice-block">
+          <div class="label">Do</div>
+          <div class="quote">"Power-Up applied. <em>Fatou skips the next two rounds.</em>"</div>
+        </div>
+        <div class="voice-block bad">
+          <div class="label">Don't</div>
+          <div class="quote">"Boom! Lockup activated 🔒 — Fatou is OUT for 2 rounds!!"</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIBES -->
+  <section class="section" style="margin-bottom:0">
+    <div class="section-head">
+      <div class="section-num">07 / Keywords</div>
+      <h2 class="section-title">If Brand v1 were a person.</h2>
+    </div>
+    <div class="section-body">
+      <div class="section-meta"><b>Reference frame</b>Pentagram editorial · Kenya Hara restraint · Charlotte Perriand color · West African textile<br/>character art</div>
+      <div class="vibes">
+        <span class="vibe">Editorial-warm</span>
+        <span class="vibe">Federation-restraint</span>
+        <span class="vibe">Globally-credible</span>
+        <span class="vibe">Friend-at-the-table</span>
+        <span class="vibe">Hand-illustrated</span>
+        <span class="vibe">Banjul-issue</span>
+        <span class="vibe">Quiet but warm</span>
+        <span class="vibe">Tactile precision</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div>Kardyx Brand v1 · Locked 2026-05-03</div>
+    <div class="credit">Atlas × Quiet Game · Hybrid</div>
+  </div>
+
+</div>
+</body>
+</html>

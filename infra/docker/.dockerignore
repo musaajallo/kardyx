@@ -1,0 +1,15 @@
+node_modules
+.next
+.expo
+.turbo
+dist
+build
+*.log
+.env
+.env.*
+!.env.example
+.git
+.github
+docs
+android
+ios

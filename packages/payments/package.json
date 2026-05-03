@@ -1,0 +1,22 @@
+{
+  "name": "@kardyx/payments",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./providers/waychit": "./src/providers/waychit.ts",
+    "./providers/modern-pay": "./src/providers/modern-pay.ts",
+    "./providers/gamswitch": "./src/providers/gamswitch.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf .turbo"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.2"
+  }
+}
